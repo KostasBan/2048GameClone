@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void ExecuteSwipe(Swipe swipeDirection, Vector2 swipeVelocity)
     {
-        Debug.Log(swipeDirection.ToString());
-        _movements.GetMovement(Swipe.Up).MoveItems();
+        _movements.GetMovement(swipeDirection)?.MoveItems();
         _spawner.SpawnNumber();
     }
 }
