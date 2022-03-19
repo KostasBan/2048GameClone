@@ -6,6 +6,8 @@ public class FillItem : MonoBehaviour
 {
     GridCell _currentGridCell;
 
+    public int Value { get; set; }
+
     private void Start()
     {
         _currentGridCell = transform.parent.GetComponent<GridCell>();
