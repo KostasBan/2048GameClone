@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class FillItem : MonoBehaviour
 {
-    GridCell _currentGridCell;
-
     public int Value { get; set; }
+    public GridCell Cell { get; set; }
 
     private void Start()
     {
-        _currentGridCell = transform.parent.GetComponent<GridCell>();
+        Cell = transform.parent.GetComponent<GridCell>();
     }
 
     private void OnEnable() => ServiceLocator.Current.Get<ActiveItemService>().ActiveItems.Add(this);
     private void OnDisable() => ServiceLocator.Current.Get<ActiveItemService>().ActiveItems.Remove(this);
     private void OnDestroy() => ServiceLocator.Current.Get<ActiveItemService>().ActiveItems.Remove(this);
 
-    private void ChangeParent(Transform newParent)
-    {
-        transform.parent = newParent;
-    }
-
-    IEnumerator MoveFillItem()
+    public IEnumerator MoveFillItem()
     {
         float time = 0;
         Vector3 startPosition = transform.position;

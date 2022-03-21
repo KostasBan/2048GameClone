@@ -10,13 +10,13 @@ public class MoveUp : ItemMovement
     public override void MoveItems()
     {
         Debug.Log("Moving Up");
-        ActiveItemService activeItemService = ServiceLocator.Current.Get<ActiveItemService>();
-        foreach (var item in activeItemService.ActiveItems)
-        {
+        //ActiveItemService activeItemService = ServiceLocator.Current.Get<ActiveItemService>();
+        //foreach (var item in activeItemService.ActiveItems)
+        //    SlideUp(item.Cell);
 
-        }
-
-
+        GridService grid = ServiceLocator.Current.Get<GridService>();
+        foreach (var item in grid.GridPositions)
+            SlideUp(item);
     }
 
     private void SlideUp(GridCell cell)
@@ -36,7 +36,8 @@ public class MoveUp : ItemMovement
             {
                 if (cell.Fill.Value == nextCell.Fill.Value)
                 {
-                    nextCell.Fill.transform.parent = cell.transform; // TO DO with change parent
+                    nextCell.Fill.transform.parent = cell.transform;
+                    nextCell.Fill.Cell = cell;
                     cell.Fill = nextCell.Fill;
                     nextCell.Fill = null;
                 }
